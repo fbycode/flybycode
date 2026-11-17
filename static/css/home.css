@@ -1,0 +1,258 @@
+/* A concise single-page story; detail stays one click away. */
+:root{
+  /* At normal text settings, descriptions range from 15px on small/short
+     screens to their existing 16–17px desktop sizes. Rem bounds retain zoom. */
+  --copy-size:clamp(.9375rem,min(calc(.6875rem + .3125vw),calc(.75rem + .5svh)),1.0625rem);
+  --copy-compact-size:clamp(.9375rem,min(calc(.8125rem + .15625vw),calc(.84375rem + .25svh)),1rem);
+}
+.hero-topline>.hero-location:first-child{display:grid;grid-template-columns:6px minmax(0,1fr);column-gap:9px;row-gap:6px;align-items:start;min-width:0}
+.hero-location>.status-dot{margin-top:8px}
+.hero-location-title{line-height:1.5;text-transform:none}
+.hero-location-detail{grid-column:2;text-transform:none;letter-spacing:.015em;line-height:1.5;color:#e5eff2}
+.hero-area{white-space:nowrap}
+.site-header nav .mobile-nav-paper{display:none}
+.hero-stage{position:absolute;top:108px;right:var(--gutter);display:flex;align-items:center;gap:13px;padding:11px 16px;color:#f5fcff;background:rgba(8,20,32,.78);border-right:3px solid var(--lab-teal);border-radius:4px;line-height:1.4;pointer-events:none}
+#hero-stage-number{font-size:15px;letter-spacing:.06em;color:var(--ice);font-variant-numeric:tabular-nums}
+#hero-stage-label{font-size:15px;font-weight:600}
+.hero-facts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;margin-top:22px;font-size:15px;line-height:1.5;color:#d9e6ec;text-shadow:0 1px 4px #08141bcc}
+.hero-code-credit,.hero-model{display:inline-flex;align-items:center;gap:8px}
+.hero-code-credit{flex-wrap:wrap;gap:5px 8px}
+.hero-model{white-space:nowrap;color:#f5fcff}
+.hero-model img{width:25px;height:21px;flex:none}
+/* Remove the forced tagline break; move the CTA first if space gets tight.
+   Only narrow phones wrap the sentence, instead of clipping or tiny text. */
+.hero-description{flex-wrap:wrap}
+.hero-description p{flex-shrink:0;max-width:100%}
+.hero-description .round-link{flex-shrink:0}
+@media(min-width:1600px){.hero-stage{top:121px}}
+/* Keep the hero's reading cue distinct even over the brightest video frames. */
+.hero-copy>.eyebrow{
+  display:table;
+  max-width:100%;
+  padding:9px 16px;
+  color:#f5fcff;
+  font-weight:700;
+  background:rgba(8,20,32,.78);
+  border-left:3px solid var(--lab-teal);
+  border-radius:4px;
+  box-shadow:0 3px 18px #07131d24;
+  text-shadow:0 1px 2px #0008;
+}
+/* Fit landscape heroes to both viewport dimensions, not monitor inches.
+   These desktop rules stay independent of the mobile composition below. */
+@media(min-width:761px){
+  .site-header{height:clamp(4rem,8svh,4.875rem)}
+  .hero-film{
+    --hero-support-size:clamp(1.0625rem,min(1.4vw,2.6svh),1.5rem);
+    --hero-title-size:clamp(3.25rem,min(9vw,16svh),11.375rem);
+    min-height:36rem;
+  }
+  .hero-topline{top:calc(clamp(4rem,8svh,4.875rem) + clamp(1.25rem,3svh,2.25rem))}
+  .hero-stage{top:calc(clamp(4rem,8svh,4.875rem) + clamp(1.25rem,3svh,2.25rem) - .25rem)}
+  .hero-copy{bottom:clamp(6.75rem,12svh,9.375rem)}
+  .hero-copy h1{font-size:var(--hero-title-size);margin:.1em 0 .15em}
+  .hero-copy>.eyebrow{padding:.4em .7em;letter-spacing:.075em}
+  .hero-description{gap:1.5rem}
+  .hero-facts{margin-top:clamp(.875rem,2.2svh,1.375rem);gap:.5rem 1.5rem}
+  .hero-bottom{bottom:clamp(1.25rem,3svh,2.5rem);padding-top:clamp(.875rem,2svh,1.375rem)}
+  .round-link>span{width:clamp(2.5rem,4.8svh,3rem);height:clamp(2.5rem,4.8svh,3rem)}
+}
+/* Mobile hero: an uncropped, full-width film followed by its own reading area.
+   Natural height accommodates wrapped text and browser text enlargement;
+   only the task badge overlays the footage. Desktop rules are untouched. */
+@media(max-width:760px){
+  .site-header{height:60px;padding-inline:18px;gap:12px}
+  .site-header:not(.scrolled):not(.solid){background:var(--night)}
+  .site-header .wordmark{font-size:17px;flex:none}
+  .site-header .wordmark svg{width:24px;height:24px;margin-right:8px}
+  /* Native horizontal scrolling keeps every destination reachable by touch
+     and keyboard without shrinking tap targets or widening the page. */
+  .site-header nav{flex:1;min-width:0;gap:18px;font-size:15px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--lab-teal) transparent}
+  .site-header nav a[href]{min-height:44px;display:flex;flex:none;align-items:center;white-space:nowrap}
+  .site-header nav a:focus-visible{outline-offset:-3px}
+  .hero-film{
+    --hero-support-size:clamp(.9375rem,3.9vw,1rem);
+    --hero-mobile-gutter:clamp(18px,4.6vw,28px);
+    display:grid;grid-template-columns:minmax(0,1fr);
+    height:auto;min-height:0;max-height:none;padding:60px 0 24px;
+  }
+  .hero-film>.hero-topline,.hero-film>.hero-stage,.hero-film>.hero-copy,.hero-film>.hero-bottom{position:static;min-width:0}
+  .hero-topline{grid-row:1;margin:18px var(--hero-mobile-gutter) 16px;font-size:15px;letter-spacing:.015em}
+  .hero-topline>.hero-location:first-child{row-gap:3px}
+  .hero-location-detail{color:#c4d4dc;letter-spacing:0}
+  .hero-video{grid-area:2 / 1;position:static;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;mask-image:none;-webkit-mask-image:none}
+  .hero-shade{display:none}
+  .hero-stage{grid-area:2 / 1;align-self:start;justify-self:end;z-index:1;max-width:calc(100% - 20px);margin:10px;padding:6px 9px;gap:8px;background:rgba(8,20,32,.86);border:0;border-right:2px solid var(--lab-teal);border-radius:3px}
+  #hero-stage-number,#hero-stage-label{font-size:15px;line-height:1.5}
+  .hero-copy{grid-row:3;margin:20px var(--hero-mobile-gutter) 0}
+  .hero-copy>.eyebrow{display:block;padding:0;font-size:.8125rem;letter-spacing:.035em;color:var(--ice);background:none;border:0;border-radius:0;box-shadow:none;text-shadow:none}
+  .hero-copy h1{font-size:clamp(2rem,9vw,2.75rem);line-height:1.12;margin:8px 0 12px}
+  .hero-description{align-items:flex-start;gap:14px}
+  .hero-description p{font-size:var(--hero-support-size);line-height:1.55}
+  .hero-description .round-link{min-height:44px;gap:10px;font-size:15px}
+  .hero-description .round-link>span{width:36px;height:36px;font-size:15px}
+  .hero-facts{display:grid;gap:6px;margin-top:16px;font-size:15px;line-height:1.5;text-shadow:none;color:#c4d4dc}
+  .hero-code-credit{gap:4px 8px}
+  .hero-model{gap:6px}
+  .hero-model img{width:20px;height:auto}
+  .hero-bottom{grid-row:4;display:block;margin:18px var(--hero-mobile-gutter) 0;padding-top:12px;border-color:#ffffff25}
+  .hero-bottom .scroll-cue{display:none}
+  .hero-bottom .film-controls{display:flex;justify-content:space-between;gap:12px;max-width:none;font-size:15px;letter-spacing:0}
+  .hero-bottom .film-controls>span{display:block;max-width:none;font-size:15px;line-height:1.5;color:#c4d4dc}
+  .hero-bottom .icon-button{width:44px;height:44px;flex:none}
+}
+.section-shell{padding-block:76px}
+.section-top{padding-bottom:30px}
+.section-top .eyebrow{min-width:0;flex-shrink:1}
+.publication-meta{padding-bottom:60px}
+/* Bound the whole player by viewport height as well as width. A proportional
+   width keeps 16:9 without cropping or adding a wide letterboxed container.
+   Reserve space for the sticky nav and context; very short screens can scroll. */
+.research-film{--film-height:max(13.5rem,min(60svh,calc(100svh - 18rem)))}
+.research-film>.section-shell{padding-top:0}
+/* Only the video shrinks: keep the heading aligned to the full section grid. */
+.research-film-player{max-width:calc(var(--film-height) * 16 / 9);margin-inline:auto}
+.research-film-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:30px;border-top:1px solid var(--line);margin-bottom:28px}
+.research-film-heading>div{flex-shrink:0}
+.research-film-heading h2{font-size:clamp(34px,3.1vw,48px);margin-top:12px}
+.research-film-heading>p{max-width:300px;color:var(--subtle);font-size:var(--copy-size)}
+.research-film-player video{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;border-radius:10px;box-shadow:0 12px 40px #101d2512}
+/* Explicitly requested small footer credit; keep it visible and zoomable. */
+.film-music-credit{display:flex;flex-wrap:wrap;gap:3px 14px;padding:0 var(--gutter) 24px;color:var(--subtle);font-size:.6875rem;line-height:1.65;overflow-wrap:anywhere}
+.film-music-credit a{text-decoration:underline;text-underline-offset:3px}
+.full-film-disclosure{margin-top:28px;border-top:1px solid var(--line)}
+.full-film-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:14px 0;font-size:var(--copy-size);font-weight:500}
+.full-film-disclosure[open]>summary{margin-bottom:12px}
+/* Native controls and full-screen playback remain unchanged. */
+.feedback-heading{align-items:center;gap:8%}
+.feedback-heading>p{font-size:var(--copy-size);max-width:470px}
+.refinement-loop{margin-top:32px}
+.case-list{margin-top:18px}
+details{scroll-margin-top:100px}
+summary{cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.case-disclosure{border-bottom:1px solid #ffffff25}
+.case-disclosure>summary{display:grid;grid-template-columns:150px 1fr 36px;align-items:center;gap:28px;padding:24px 0}
+.case-disclosure>summary>img{width:150px;aspect-ratio:16/9;object-fit:cover;border:1px solid #ffffff20;border-radius:6px}
+.case-summary{display:grid;gap:8px}
+.case-label{font-size:15px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.case-summary strong{font-size:clamp(22px,2.2vw,32px);line-height:1.2;font-weight:500;letter-spacing:-.04em}
+.case-summary>span:last-child{font-size:var(--copy-compact-size);color:#b5c4ca;line-height:1.5}
+.disclosure-plus{display:grid;place-items:center;width:32px;height:32px;font-size:27px;font-weight:400;transition:transform .2s}
+details[open]>summary>.disclosure-plus{transform:rotate(45deg)}
+.case-disclosure>summary:hover .case-summary strong{color:var(--ice)}
+.detail-body{padding:0 0 30px;font-size:var(--copy-compact-size);line-height:1.75;min-width:0}
+.detail-body>p{max-width:1000px;color:var(--subtle);margin-bottom:20px}
+.detail-body>img{width:100%;background:white;border-radius:6px;margin-bottom:22px}
+.inline-disclosure{border-top:1px solid var(--line)}
+.inline-disclosure>summary{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:23px 0;font-size:18px;font-weight:500}
+.dark-disclosure{border-color:#ffffff25}
+.dark-disclosure>.detail-body>p{color:#b5c4ca}
+.concise-method .inline-disclosure{border-top:0}
+.research-detail{color:var(--ink);background:var(--paper);padding:28px;border-radius:8px;margin-bottom:24px}
+.research-detail .record-note{font-size:15px;line-height:1.7;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:0}
+.research-detail .case{margin-top:24px!important;background:transparent!important}
+.research-detail .tag{display:none}
+.research-detail .case>h3{font-size:26px;line-height:1.3;margin-bottom:22px}
+.research-detail .case>p{color:var(--subtle)}
+.research-detail .cstep{padding-top:26px;margin-top:28px;border-top:1px solid var(--line)}
+.research-detail .cstep-head{display:flex;align-items:baseline;gap:18px;margin-bottom:18px}
+.research-detail .cstep-num{color:var(--teal);font-size:17px;font-weight:600}
+.research-detail h4{font-size:20px;letter-spacing:-.03em;line-height:1.45;margin:0}
+.research-detail .simclip{margin:22px 0}
+.research-detail .simclip video{width:100%;max-height:580px;object-fit:contain}
+.research-detail .simclip-bar,.research-detail .codebox figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;padding:12px 18px;background:var(--night);color:var(--ice);font-size:15px}
+.research-detail figcaption{font-size:15px;color:var(--subtle);line-height:1.65;margin-top:12px}
+.research-detail .codebox{margin:22px 0;overflow:hidden;border-radius:5px;background:var(--night);color:#d6e2e3}
+.research-detail .codebox figcaption{margin:0;border-bottom:1px solid #ffffff25}
+.research-detail pre.code{margin:0;padding:20px;overflow:auto;max-width:100%;font-size:15px;line-height:1.8;tab-size:4}
+.research-detail .t-com{color:#a1b7bc}.research-detail .t-str,.research-detail .t-good{color:#acded4}.research-detail .t-kw,.research-detail .t-bad{color:#f3bb95}.research-detail .t-num,.research-detail .t-const{color:#bacbee}
+.research-detail .img-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}
+.research-detail .img-grid img{width:100%;border-radius:3px}
+.research-detail .quote{border-left:2px solid var(--teal);padding:8px 0 8px 20px;font-size:var(--copy-size)}
+.research-detail .decision{font-weight:600;color:var(--teal)}
+.compact-heading{display:grid;grid-template-columns:1.3fr 1fr;gap:10%;align-items:end}
+.compact-heading h2,.result-headline h2{font-size:clamp(34px,3.5vw,52px)}
+.compact-heading>p{font-size:var(--copy-size);color:var(--subtle);max-width:420px}
+.concise-flight{--demo-height:max(13.5rem,50svh)}
+/* Keep captions wide enough to read when a short landscape viewport limits
+   the video height. On narrow phones, the available width remains the limit. */
+.concise-flight .demo-switcher,.concise-flight .demo-panel{max-width:max(40rem,calc(var(--demo-height) * 16 / 9));margin-inline:auto}
+.concise-flight .demo-switcher{margin-top:28px}
+.concise-flight .demo-film{max-width:calc(var(--demo-height) * 16 / 9);margin:20px auto 0}
+.concise-flight .demo-film video{object-fit:contain}
+.concise-flight .demo-caption{padding:18px 0 22px}
+.concise-flight .demo-caption .eyebrow{display:none}
+.concise-flight .demo-caption h3{margin-top:0;font-size:28px}
+.concise-flight .demo-caption p{margin-top:8px;font-size:var(--copy-compact-size)}
+.concise-flight .demo-outcome>strong{font-size:46px}
+.concise-flight .demo-outcome>span{margin-top:8px}
+.table-wrap{overflow-x:auto;max-width:100%;margin:22px 0 10px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.table-wrap table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.65}
+.table-wrap th,.table-wrap td{padding:13px 14px;text-align:center;border-bottom:1px solid var(--line)}
+.table-wrap th{font-weight:600;background:#e9efee}
+.table-wrap td:first-child,.table-wrap .l{text-align:left}
+.table-wrap .ours{background:#e3f0ef}
+.result-headline{display:grid;grid-template-columns:1.1fr 1fr;gap:8%;align-items:center}
+.result-metric{display:grid;gap:8px}
+.result-metric>span{font-size:var(--copy-compact-size);color:var(--subtle)}
+.result-metric>strong{font-size:clamp(36px,4vw,61px);font-weight:500;letter-spacing:-.065em;color:var(--teal);white-space:nowrap}
+.result-metric>strong>span{color:#627a84}
+.result-context{color:var(--subtle);font-size:15px;margin-top:25px}
+.result-tabs{display:flex;gap:28px;border-bottom:1px solid #b8c8c8;margin-top:30px}
+.result-tabs button{font-size:17px;font-weight:500;border:0;border-bottom:3px solid transparent;padding:16px 0;background:transparent;color:var(--subtle);text-align:left;line-height:1.5}
+.result-tabs button[aria-selected=true]{color:var(--teal);border-bottom-color:var(--lab-blue)}
+.result-panel{padding:24px 0 12px}
+.result-panel figure{background:#fff;padding:20px;border-radius:8px}
+.chart-scroll{overflow-x:auto;max-width:100%}
+.chart-scroll img{width:100%;height:auto}
+.result-panel figcaption,.panel-caption{font-size:15px;color:var(--subtle);margin-top:16px;line-height:1.7}
+.completion-highlight{display:flex;align-items:center;gap:25px}
+.completion-highlight strong{font-size:44px;font-weight:500;letter-spacing:-.05em;color:var(--teal)}
+.completion-highlight span{font-size:var(--copy-compact-size);color:var(--subtle);line-height:1.6}
+#completion table{min-width:950px}
+.concise-results .inline-disclosure{margin-top:15px}
+.concise-results .inline-disclosure+.inline-disclosure{margin-top:0}
+.chart-mobile-note{display:none}
+.task-key{display:grid;grid-template-columns:1fr 1fr;gap:22px 35px;margin:25px 0 0}
+.task-key dt{font-weight:600;font-size:17px;color:var(--teal)}
+.task-key dd{font-size:var(--copy-compact-size);line-height:1.65;margin:6px 0 0;color:var(--subtle)}
+.paper-compact{padding-block:30px 45px}
+.paper-compact .inline-disclosure{border-top:0}
+.paper-compact .filled-link{margin-top:10px}
+.abstract-copy p{max-width:1000px;font-size:var(--copy-size);color:var(--subtle)}
+@media(max-width:760px){
+  .section-shell{padding-block:50px}.publication-meta{padding-bottom:40px}.section-top{padding-bottom:25px}
+  .research-film-heading{display:block;padding-top:24px;margin-bottom:22px}
+  .research-film-heading>p{margin-top:18px;max-width:100%}
+  .research-film-player video{border-radius:6px}
+  .case-disclosure>summary{grid-template-columns:74px 1fr 24px;gap:14px;padding:22px 0}
+  .case-disclosure>summary>img{width:74px;aspect-ratio:1;object-fit:cover}
+  .case-summary{gap:7px}.case-summary strong{font-size:22px}.case-label{font-size:15px;letter-spacing:.02em}
+  .disclosure-plus{width:24px;font-size:25px}.inline-disclosure>summary{font-size:18px;padding:22px 0}
+  .research-detail{padding:20px;margin-inline:-8px}.research-detail .case>h3{font-size:23px}
+  .research-detail .img-grid{grid-template-columns:1fr}.research-detail h4{font-size:19px}
+  .research-detail pre.code{padding:15px}.research-detail .simclip-bar,.research-detail .codebox figcaption{padding:12px}
+  .compact-heading,.result-headline{grid-template-columns:1fr;gap:24px}
+  .concise-flight .demo-switcher{margin-top:20px}.concise-flight .demo-caption h3{font-size:25px}
+  .result-metric>strong{font-size:44px}.result-context{margin-top:22px}
+  .result-tabs{gap:20px;overflow-x:auto;margin-top:22px}.result-tabs button{font-size:16px;white-space:nowrap}
+  .result-panel figure{padding:14px}.chart-scroll img{width:760px;max-width:none}
+  .chart-mobile-note{display:block;color:var(--subtle);font-size:15px;margin:6px 0 22px}
+  .table-wrap th,.table-wrap td{padding:10px}.completion-highlight{gap:18px}.completion-highlight strong{font-size:35px}
+  #physical-outcomes table{min-width:550px}.task-key{grid-template-columns:1fr;gap:18px}
+  .paper-compact{padding-block:20px 35px}
+}
+@media(max-width:380px){.case-disclosure>summary{grid-template-columns:1fr 24px}.case-disclosure>summary>img{display:none}.site-header nav{gap:14px}}
+
+/* Compact mobile publication credits, explicitly requested independently of
+   the body-text minimum. Rem/em sizes still respect text enlargement. */
+@media(max-width:760px){
+  .publication-meta .author-block{padding-top:18px}
+  .publication-meta .author-names{font-size:.875rem;line-height:1.65;gap:5px 12px}
+  .publication-meta .author-block sup{font-size:.7em;line-height:0;margin-left:2px}
+  .publication-meta .affiliations{font-size:.8125rem;line-height:1.6;gap:6px;margin-top:16px;padding:12px 14px;border-radius:8px}
+  .publication-meta .author-note{font-size:.8125rem;line-height:1.6;margin-top:14px}
+  .publication-meta .publication-links{gap:8px clamp(8px,2.5vw,16px);margin-top:14px}
+  .publication-meta .publication-links .text-link{font-size:.8125rem;line-height:1.4;gap:6px;min-height:44px;margin-top:0;padding:10px 0 8px}
+}
